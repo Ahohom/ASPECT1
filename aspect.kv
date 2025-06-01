@@ -1,0 +1,65 @@
+#:kivy 2.0.0
+#:import MDNavigationLayout kivymd.uix.navigationdrawer.MDNavigationLayout
+#:import MDNavigationDrawer kivymd.uix.navigationdrawer.MDNavigationDrawer
+#:import MDTopAppBar kivymd.uix.appbar.MDTopAppBar
+#:import MDList kivymd.uix.list.MDList
+#:import MDListItem kivymd.uix.list.MDListItem
+#:import MDListItemLeadingIcon kivymd.uix.list.MDListItemLeadingIcon
+#:import MDListItemHeadlineText kivymd.uix.list.MDListItemHeadlineText
+
+MDNavigationLayout:
+    ScreenManager:
+        id: screen_manager
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        BoxLayout:
+            orientation: 'vertical'
+            MDTopAppBar:
+                title: "Фильтры"
+                left_action_items: [["close", lambda x: nav_drawer.set_state("close")]]
+
+            ScrollView:
+                MDList:
+                    MDListItem:
+                        MDListItemLeadingIcon:
+                            icon: "city"
+                        MDListItemHeadlineText:
+                            text: "Город"
+
+                    MDListItem:
+                        MDListItemLeadingIcon:
+                            icon: "tag"
+                        MDListItemHeadlineText:
+                            text: "Категория"
+
+                    MDListItem:
+                        MDListItemLeadingIcon:
+                            icon: "currency-rub"
+                        MDListItemHeadlineText:
+                            text: "Цена"
+
+<ApartmentsScreen>:
+    name: 'apartments'
+    MDTopAppBar:
+        title: "Поиск"
+        pos_hint: {'top': 1}
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+        right_action_items: [["dots-vertical", lambda x: app.open_menu(x)]]  # Кнопка для открытия меню
+        elevation: 2
+
+    MDTopAppBar:
+        pos_hint: {'top': 0.05}
+        left_action_items: [["hammer", lambda x: app.goto_realtor_constructor(nav_drawer)]]
+        elevation: 0
+
+    MDScrollView:
+        pos_hint: {'top': 0.95, 'bottom': 0.1}
+        do_scroll_x: False
+        MDGridLayout:
+            id: card_grid
+            cols: 2
+            padding: 10
+            spacing: 10
+            size_hint_y: None
+            height: self.minimum_height
