@@ -20,7 +20,7 @@ import os
 from kivy.utils import platform
 from db_utils import get_db_path, get_db_connection
 #Для пк
-#Window.size = (360, 640)
+Window.size = (360, 640)
 
 try:
     from android.storage import app_storage_path
@@ -134,9 +134,9 @@ class AspectApp(MDApp):
     def build(self):
         # Загружаем KV-строку
         Builder.load_string(KV)
-        #Для андройда------------------------------
-        Window.size = (Window.width, Window.height)
-        Window.fullscreen = 'auto'
+        #Размер экрана Для андройда----------------
+        #Window.size = (Window.width, Window.height)
+        #Window.fullscreen = 'auto'
         #------------------------------------------
         # Создаем главный макет
         self.root_layout = MDFloatLayout()
